@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+#apDiv1 {
+	position:absolute;
+	left:200px;
+	width:900px;
+	height:600px;
+	
+	z-index:1;
+	border:solid #E7E7E7 1px
+}
+#apDiv2 {
+	position:absolute;
+	width:200px;
+	height:600px;
+	z-index:2;
+	border:solid #E7E7E7 1px
+}
+#apDiv3 {
+	position:absolute;
+	width:202px;
+	height:164px;
+	z-index:3;
+	left: -1px;
+	top: -2px;
+}
+#apDiv4 {
+	position:absolute;
+	width:202px;
+	height:435px;
+	z-index:4;
+	top: 164px;
+	<!--border:solid #b0c4de 1px;-->
+	left: -1px;
+}
+#apDiv5 {
+	position:absolute;
+	width:699px;
+	height:600px;
+	z-index:1;
+	left: 202px;
+	border:solid  #b0c4de 1px;
+}
+
+a:hover {
+    color: #F30;
+ text-decoration: none;}    /* 鼠标悬浮在上的链接 橙色 */
+
+a:link {
+	text-decoration: none}

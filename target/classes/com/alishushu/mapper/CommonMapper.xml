@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alishushu.mapper.CommonMapper">
+  <resultMap id="BaseResultMap" type="com.alishushu.bean.Common">
+    <id column="COMMONID" jdbcType="VARCHAR" property="commonid" />
+    <result column="SHOPSID" jdbcType="VARCHAR" property="shopsid" />
+    <result column="COMMCONTEXT" jdbcType="VARCHAR" property="commcontext" />
+    <result column="COMMTIME" jdbcType="VARCHAR" property="commtime" />
+    <result column="MORECOMM" jdbcType="VARCHAR" property="morecomm" />
+    <result column="LEVELS" jdbcType="VARCHAR" property="levels" />
+    <result column="USERSID" jdbcType="VARCHAR" property="usersid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COMMONID, SHOPSID, COMMCONTEXT, COMMTIME, MORECOMM, LEVELS, USERSID
+  </sql>
+  <select id="selectByExample" parameterType="com.alishushu.bean.CommonExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from COMMON
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from COMMON
+    where COMMONID = #{commonid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from COMMON
+    where COMMONID = #{commonid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.alishushu.bean.CommonExample">
+    delete from COMMON
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.alishushu.bean.Common">
+    insert into COMMON (COMMONID, SHOPSID, COMMCONTEXT, 
+      COMMTIME, MORECOMM, LEVELS, 
+      USERSID)
+    values (#{commonid,jdbcType=VARCHAR}, #{shopsid,jdbcType=VARCHAR}, #{commcontext,jdbcType=VARCHAR}, 
+      #{commtime,jdbcType=VARCHAR}, #{morecomm,jdbcType=VARCHAR}, #{levels,jdbcType=VARCHAR}, 
+      #{usersid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.alishushu.bean.Common">
+    insert into COMMON
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commonid != null">
+        COMMONID,
+      </if>
+      <if test="shopsid != null">
+        SHOPSID,
+      </if>
+      <if test="commcontext != null">
+        COMMCONTEXT,
+      </if>
+      <if test="commtime != null">
+        COMMTIME,
+      </if>
+      <if test="morecomm != null">
+        MORECOMM,
+      </if>
+      <if test="levels != null">
+        LEVELS,
+      </if>
+      <if test="usersid != null">
+        USERSID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commonid != null">
+        #{commonid,jdbcType=VARCHAR},
+      </if>
+      <if test="shopsid != null">
+        #{shopsid,jdbcType=VARCHAR},
+      </if>
+      <if test="commcontext != null">
+        #{commcontext,jdbcType=VARCHAR},
+      </if>
+      <if test="commtime != null">
+        #{commtime,jdbcType=VARCHAR},
+      </if>
+      <if test="morecomm != null">
+        #{morecomm,jdbcType=VARCHAR},
+      </if>
+      <if test="levels != null">
+        #{levels,jdbcType=VARCHAR},
+      </if>
+      <if test="usersid != null">
+        #{usersid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.alishushu.bean.CommonExample" resultType="java.lang.Long">
+    select count(*) from COMMON
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update COMMON
+    <set>
+      <if test="record.commonid != null">
+        COMMONID = #{record.commonid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopsid != null">
+        SHOPSID = #{record.shopsid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commcontext != null">
+        COMMCONTEXT = #{record.commcontext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commtime != null">
+        COMMTIME = #{record.commtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.morecomm != null">
+        MORECOMM = #{record.morecomm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.levels != null">
+        LEVELS = #{record.levels,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usersid != null">
+        USERSID = #{record.usersid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update COMMON
+    set COMMONID = #{record.commonid,jdbcType=VARCHAR},
+      SHOPSID = #{record.shopsid,jdbcType=VARCHAR},
+      COMMCONTEXT = #{record.commcontext,jdbcType=VARCHAR},
+      COMMTIME = #{record.commtime,jdbcType=VARCHAR},
+      MORECOMM = #{record.morecomm,jdbcType=VARCHAR},
+      LEVELS = #{record.levels,jdbcType=VARCHAR},
+      USERSID = #{record.usersid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alishushu.bean.Common">
+    update COMMON
+    <set>
+      <if test="shopsid != null">
+        SHOPSID = #{shopsid,jdbcType=VARCHAR},
+      </if>
+      <if test="commcontext != null">
+        COMMCONTEXT = #{commcontext,jdbcType=VARCHAR},
+      </if>
+      <if test="commtime != null">
+        COMMTIME = #{commtime,jdbcType=VARCHAR},
+      </if>
+      <if test="morecomm != null">
+        MORECOMM = #{morecomm,jdbcType=VARCHAR},
+      </if>
+      <if test="levels != null">
+        LEVELS = #{levels,jdbcType=VARCHAR},
+      </if>
+      <if test="usersid != null">
+        USERSID = #{usersid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COMMONID = #{commonid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alishushu.bean.Common">
+    update COMMON
+    set SHOPSID = #{shopsid,jdbcType=VARCHAR},
+      COMMCONTEXT = #{commcontext,jdbcType=VARCHAR},
+      COMMTIME = #{commtime,jdbcType=VARCHAR},
+      MORECOMM = #{morecomm,jdbcType=VARCHAR},
+      LEVELS = #{levels,jdbcType=VARCHAR},
+      USERSID = #{usersid,jdbcType=VARCHAR}
+    where COMMONID = #{commonid,jdbcType=VARCHAR}
+  </update>
+</mapper>

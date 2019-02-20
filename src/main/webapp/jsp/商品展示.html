@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 微软雅黑;
+        }
+        a {
+            color: black;
+            text-decoration: none;
+        }
+        a:hover {
+            color: rgb(255, 218, 68);
+        }
+        /*头部*/
+        header {
+            padding: 0;
+            margin: -15px auto 0;
+            width: 100%;
+            background-color: rgb(255, 218, 68);
+            position: fixed;
+            top: 15px;
+            z-index: 99;
+        }
+        .head-one{
+            width: 100%;
+            background-color: #fff;
+        }
+        .head-one ul{
+            list-style: none;
+        }
+        .head-one ul li{
+            float: right;
+            margin-top: 8px;
+        }
+        .head-one a{
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 15px 10px;
+            padding: 0 10px;
+            line-height: 25px;
+            border: solid 1px #ccc;
+            border-radius: 3px;
+            background-color: #fff;
+            color: #3c3c3c;
+
+        }
+        .head-one a:hover{
+            color: rgb(255, 218, 68);
+        }
+        .head-one a span{
+            margin-bottom: 2px;
+        }
+        .head-two{
+            height: 80px;
+        }
+        .head-two h1 {
+            float: left;
+        }
+        #title{
+            font-family: 幼圆;
+        }
+        .head-two ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 0 20px;
+            line-height: 80px;
+            font-size: 16px;
+        }
+        .head-two ul li a{
+            text-decoration: none;
+        }
+        .head-two ul li a:hover {
+            color: white;
+        }
+        .head-two li:first-child {
+            margin-left: 150px;
+        }
+        .head-two a {
+            color: black;
+        }
+    </style>
+    <link rel="stylesheet" href="bootstrap.min.css"/>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="bootstrap.min.js"></script>
+</head>
+<body>
+<header>
+    <div class="head-one">
+        <div class="container">
+            <span style="float: left; margin: 10px 0 0 10px;" >Hi~简单烤鱼oso</span>
+            <ul>
+                <li><a href="#">联系客服</a></li>
+                <li><a href="#">江苏无锡</a></li>
+                <li><a href="#">消息 <span style="background-color: red;" class="badge">10</span></a></li>
+                <li><a href="#">我要开店</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车</a></li>
+            </ul></div>
+    </div>
+    <div class="container head-two">
+        <h1 id="title"><b>阿里叔叔</b></h1>
+        <ul>
+            <li><a href="#">首页</a></li>
+            <li><a href="#">手机二手</a></li>
+            <li><a href="#">二手车估价</a></li>
+            <li><a href="#">降降降</a></li>
+            <li><a href="#">发布闲置</a></li>
+            <li><a href="#">我的闲置</a></li>
+        </ul>
+    </div>
+</header>
+<div class="container">
+    <div></div>
+</div>
+</body>
+</html>

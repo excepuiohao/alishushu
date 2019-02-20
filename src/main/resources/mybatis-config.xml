@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- mybatis:提供缓存机制（cache），一级（session）， User u = Session.selectOne("select 
+	* from user1 where ronum = 1") 数据更新后缓存清空需要重新查询 User u1 = Session.selectOne() 
+	二级（namespace） log -->
+
+<configuration>
+
+	<settings>
+		<!-- 设置是否启用缓存,可以是否打印log，还可以设置是否启用主键自增长 -->
+		<setting name="cacheEnabled" value="true" />   <!-- 二级缓存 -->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	
+	<mappers>
+	<package name="com.alishushu.mapper"/>
+	</mappers>
+
+</configuration>    

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alishushu.mapper.ZH_Mapper">
+	<select id="FindAddressByBuyerid" parameterType="String"
+		resultType="String">
+		select users.address from users where
+		users.usersid=#{Buyerid}
+	</select>
+
+	<select id="FindAddressBySelerid" parameterType="String"
+		resultType="String">
+		select distinct shop.shopaddr from shop where
+		shop.shopsid=#{Selerid}
+	</select>
+
+	<select id="FindMoneyByItemId" resultType="int">
+		select
+		NVL(SUM(items.price) ,0)
+		from orderitem , items
+		where orderitem.selerid
+		= #{1}
+		and orderitem.ordertime = #{0}
+		and orderitem.itemid =
+		items.itemid
+	</select>
+
+	<select id="FindMessage" resultType="com.alishushu.bean.Itmessage"
+		parameterType="String">
+
+		select Itmessage.*
+		from itmessage
+		where itmessage.itemid
+		in
+		(select items.itemid from items where items.userid = #{userid})
+		and
+		itmessage.states='0'
+
+	</select>
+
+	<delete id="DeleteMessage" parameterType="String">
+
+		delete from ITMESSAGE
+		where messageid=#{messageid}
+
+	</delete>
+
+	<insert id="InsertMessage">
+		insert into
+		itmessage(fromid,itemid,toid,messcontext,messtime,states)
+		values(#{0}
+		,#{1},#{2},#{3},#{4},#{5})
+
+	</insert>
+
+
+	<update id="UpdateMessage" parameterType="String">
+		update itmessage set
+		itmessage.states='1' where messageid=#{messageid}
+	</update>
+
+	<select id="FindSysteminfo" resultType="com.alishushu.bean.Systeminfo">
+
+		select systeminfo.* from
+		systeminfo
+
+	</select>
+
+	<select id="FindItmessage" resultType="com.alishushu.bean.UserMessage"
+		parameterType="String">
+
+		select users.uname, itmessage.messcontext
+		from
+		users,itmessage
+		where itmessage.itemid = #{itemid}
+		and
+		users.usersid=itmessage.fromid
+
+	</select>
+
+	<select id="FindShopsid" resultType="String" parameterType="String">
+
+		select shopsid from shop where usersid=#{usersid}
+	</select>
+</mapper>

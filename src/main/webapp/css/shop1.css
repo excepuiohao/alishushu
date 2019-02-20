@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+.ginput1{
+	width:25px; 
+	height:25px; 
+	border-radius:20px; 
+	background-color: #F00; 
+	border:solid #F00 1px; 
+	color:#FFF}
+
+.ginput4{ 
+	width:25px; 
+	height:25px; 
+	border-radius:20px; 
+	background-color:#CCC; 
+	border:solid #CCC 1px; 
+	color:#FFF}
+
+.ginput2{ 
+	width:100%;
+	 height:100%; 
+	 border:none
+	 }
+	 .font1{ font-weight:800; font-family:"Arial Black", Gadget, sans-serif}
+.table1{ border:solid #EBEBEB 1px}
+
+
+select::-ms-expand{ display:none;}
+#apDiv1 {
+	position: absolute;
+	width: 100%;
+	height: 78px;
+	z-index: 1;
+}
+#apDiv2 {
+	position: absolute;
+	width: 464px;
+	height: 243px;
+	z-index: 2;
+	left: 600px;
+	top: 105px;
+}

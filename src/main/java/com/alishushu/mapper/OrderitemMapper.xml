@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alishushu.mapper.OrderitemMapper">
+  <resultMap id="BaseResultMap" type="com.alishushu.bean.Orderitem">
+    <id column="ORDERID" jdbcType="VARCHAR" property="orderid" />
+    <result column="ORDERTIME" jdbcType="VARCHAR" property="ordertime" />
+    <result column="SELERID" jdbcType="VARCHAR" property="selerid" />
+    <result column="ITEMID" jdbcType="VARCHAR" property="itemid" />
+    <result column="RECESTATE" jdbcType="VARCHAR" property="recestate" />
+    <result column="BUYERID" jdbcType="VARCHAR" property="buyerid" />
+    <result column="SHIPSTATE" jdbcType="VARCHAR" property="shipstate" />
+    <result column="LOGISTAL" jdbcType="VARCHAR" property="logistal" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ORDERID, ORDERTIME, SELERID, ITEMID, RECESTATE, BUYERID, SHIPSTATE, LOGISTAL
+  </sql>
+  <select id="selectByExample" parameterType="com.alishushu.bean.OrderitemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ORDERITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ORDERITEM
+    where ORDERID = #{orderid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ORDERITEM
+    where ORDERID = #{orderid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.alishushu.bean.OrderitemExample">
+    delete from ORDERITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.alishushu.bean.Orderitem">
+    insert into ORDERITEM (ORDERID, ORDERTIME, SELERID, 
+      ITEMID, RECESTATE, BUYERID, 
+      SHIPSTATE, LOGISTAL)
+    values (#{orderid,jdbcType=VARCHAR}, #{ordertime,jdbcType=VARCHAR}, #{selerid,jdbcType=VARCHAR}, 
+      #{itemid,jdbcType=VARCHAR}, #{recestate,jdbcType=VARCHAR}, #{buyerid,jdbcType=VARCHAR}, 
+      #{shipstate,jdbcType=VARCHAR}, #{logistal,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.alishushu.bean.Orderitem">
+    insert into ORDERITEM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        ORDERID,
+      </if>
+      <if test="ordertime != null">
+        ORDERTIME,
+      </if>
+      <if test="selerid != null">
+        SELERID,
+      </if>
+      <if test="itemid != null">
+        ITEMID,
+      </if>
+      <if test="recestate != null">
+        RECESTATE,
+      </if>
+      <if test="buyerid != null">
+        BUYERID,
+      </if>
+      <if test="shipstate != null">
+        SHIPSTATE,
+      </if>
+      <if test="logistal != null">
+        LOGISTAL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null">
+        #{ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="selerid != null">
+        #{selerid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemid != null">
+        #{itemid,jdbcType=VARCHAR},
+      </if>
+      <if test="recestate != null">
+        #{recestate,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerid != null">
+        #{buyerid,jdbcType=VARCHAR},
+      </if>
+      <if test="shipstate != null">
+        #{shipstate,jdbcType=VARCHAR},
+      </if>
+      <if test="logistal != null">
+        #{logistal,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.alishushu.bean.OrderitemExample" resultType="java.lang.Long">
+    select count(*) from ORDERITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ORDERITEM
+    <set>
+      <if test="record.orderid != null">
+        ORDERID = #{record.orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordertime != null">
+        ORDERTIME = #{record.ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.selerid != null">
+        SELERID = #{record.selerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemid != null">
+        ITEMID = #{record.itemid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recestate != null">
+        RECESTATE = #{record.recestate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyerid != null">
+        BUYERID = #{record.buyerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipstate != null">
+        SHIPSTATE = #{record.shipstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logistal != null">
+        LOGISTAL = #{record.logistal,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ORDERITEM
+    set ORDERID = #{record.orderid,jdbcType=VARCHAR},
+      ORDERTIME = #{record.ordertime,jdbcType=VARCHAR},
+      SELERID = #{record.selerid,jdbcType=VARCHAR},
+      ITEMID = #{record.itemid,jdbcType=VARCHAR},
+      RECESTATE = #{record.recestate,jdbcType=VARCHAR},
+      BUYERID = #{record.buyerid,jdbcType=VARCHAR},
+      SHIPSTATE = #{record.shipstate,jdbcType=VARCHAR},
+      LOGISTAL = #{record.logistal,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alishushu.bean.Orderitem">
+    update ORDERITEM
+    <set>
+      <if test="ordertime != null">
+        ORDERTIME = #{ordertime,jdbcType=VARCHAR},
+      </if>
+      <if test="selerid != null">
+        SELERID = #{selerid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemid != null">
+        ITEMID = #{itemid,jdbcType=VARCHAR},
+      </if>
+      <if test="recestate != null">
+        RECESTATE = #{recestate,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerid != null">
+        BUYERID = #{buyerid,jdbcType=VARCHAR},
+      </if>
+      <if test="shipstate != null">
+        SHIPSTATE = #{shipstate,jdbcType=VARCHAR},
+      </if>
+      <if test="logistal != null">
+        LOGISTAL = #{logistal,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDERID = #{orderid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alishushu.bean.Orderitem">
+    update ORDERITEM
+    set ORDERTIME = #{ordertime,jdbcType=VARCHAR},
+      SELERID = #{selerid,jdbcType=VARCHAR},
+      ITEMID = #{itemid,jdbcType=VARCHAR},
+      RECESTATE = #{recestate,jdbcType=VARCHAR},
+      BUYERID = #{buyerid,jdbcType=VARCHAR},
+      SHIPSTATE = #{shipstate,jdbcType=VARCHAR},
+      LOGISTAL = #{logistal,jdbcType=VARCHAR}
+    where ORDERID = #{orderid,jdbcType=VARCHAR}
+  </update>
+<select id="selectByUsers" parameterType="com.alishushu.bean.Ordernew" resultType="com.alishushu.bean.Ordernew">
+select items.itemid as itemid, items.itemname as itemname,items.itempic as itempic,
+items.shopid as shopid,items.price as price,
+shop.shopname as shopname,shop.shopaddr as shopaddr,orderitem.orderid as orderid,
+orderitem.ordertime as ordertime,
+orderitem.recestate as recestate,orderitem.shipstate as shipstate,orderitem.buyerid as buyerid
+from items,shop,orderitem where items.shopid = shop.shopsid 
+and items.itemid = orderitem.itemid 
+and orderitem.buyerid =#{buyerid}
+<if test="recestate!=null">
+and recestate = #{recestate}
+</if>
+<if test="shipstate!=null">
+ and shipstate = #{shipstate}
+ </if>
+ </select>
+</mapper>

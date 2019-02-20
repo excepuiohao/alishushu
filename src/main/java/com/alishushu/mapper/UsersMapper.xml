@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alishushu.mapper.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.alishushu.bean.Users">
+    <id column="USERSID" jdbcType="VARCHAR" property="usersid" />
+    <result column="UNAME" jdbcType="VARCHAR" property="uname" />
+    <result column="UPWD" jdbcType="VARCHAR" property="upwd" />
+    <result column="IDCARD" jdbcType="VARCHAR" property="idcard" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="NICKNAME" jdbcType="VARCHAR" property="nickname" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="PHOTO" jdbcType="VARCHAR" property="photo" />
+    <result column="INTEGRAL" jdbcType="DECIMAL" property="integral" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    USERSID, UNAME, UPWD, IDCARD, PHONE, NICKNAME, ADDRESS, EMAIL, PHOTO, INTEGRAL
+  </sql>
+  <select id="selectalluser" resultMap="BaseResultMap">
+  select * from users
+  </select>
+   <select id="selectuser" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select * from users where uname like '%${_parameter}%' 
+  or nickname like '%${_parameter}%'
+  or  idcard like '%${_parameter}%' 
+  or phone like '%${_parameter}%' 
+  or address like '%${_parameter}%'
+  or email like '%${_parameter}%'
+  </select>
+  
+  <select id="selectByExample" parameterType="com.alishushu.bean.UsersExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USERS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USERS
+    where USERSID = #{usersid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from USERS
+    where USERSID = #{usersid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.alishushu.bean.UsersExample">
+    delete from USERS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.alishushu.bean.Users">
+    insert into USERS (USERSID, UNAME, UPWD, 
+      IDCARD, PHONE, NICKNAME, 
+      ADDRESS, EMAIL, PHOTO, 
+      INTEGRAL)
+    values (#{usersid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{upwd,jdbcType=VARCHAR}, 
+      #{idcard,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{integral,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.alishushu.bean.Users">
+    insert into USERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usersid != null">
+        USERSID,
+      </if>
+      <if test="uname != null">
+        UNAME,
+      </if>
+      <if test="upwd != null">
+        UPWD,
+      </if>
+      <if test="idcard != null">
+        IDCARD,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="nickname != null">
+        NICKNAME,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="photo != null">
+        PHOTO,
+      </if>
+      <if test="integral != null">
+        INTEGRAL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usersid != null">
+        #{usersid,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upwd != null">
+        #{upwd,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.alishushu.bean.UsersExample" resultType="java.lang.Long">
+    select count(*) from USERS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update USERS
+    <set>
+      <if test="record.usersid != null">
+        USERSID = #{record.usersid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uname != null">
+        UNAME = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upwd != null">
+        UPWD = #{record.upwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcard != null">
+        IDCARD = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null">
+        NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null">
+        PHOTO = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integral != null">
+        INTEGRAL = #{record.integral,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update USERS
+    set USERSID = #{record.usersid,jdbcType=VARCHAR},
+      UNAME = #{record.uname,jdbcType=VARCHAR},
+      UPWD = #{record.upwd,jdbcType=VARCHAR},
+      IDCARD = #{record.idcard,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      PHOTO = #{record.photo,jdbcType=VARCHAR},
+      INTEGRAL = #{record.integral,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alishushu.bean.Users">
+    update USERS
+    <set>
+      <if test="uname != null">
+        UNAME = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upwd != null">
+        UPWD = #{upwd,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        IDCARD = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        PHOTO = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null">
+        INTEGRAL = #{integral,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where USERSID = #{usersid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alishushu.bean.Users">
+    update USERS
+    set UNAME = #{uname,jdbcType=VARCHAR},
+      UPWD = #{upwd,jdbcType=VARCHAR},
+      IDCARD = #{idcard,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      NICKNAME = #{nickname,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PHOTO = #{photo,jdbcType=VARCHAR},
+      INTEGRAL = #{integral,jdbcType=DECIMAL}
+    where USERSID = #{usersid,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="seByUpwd" parameterType="com.alishushu.bean.Users" resultMap="BaseResultMap">
+  select * from USERS where nickname = #{nickname,jdbcType=VARCHAR} or EMAIL = #{email,jdbcType=VARCHAR}
+  and   UPWD = #{upwd,jdbcType=VARCHAR}
+  </select>
+</mapper>
