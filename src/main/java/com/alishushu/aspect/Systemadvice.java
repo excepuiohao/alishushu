@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alishushu.bean.SysteminfoExample;
 import com.alishushu.mapper.SysteminfoMapper;
-import java.util.*；
+import java.util.*;
 
 @Aspect
 public class Systemadvice {
