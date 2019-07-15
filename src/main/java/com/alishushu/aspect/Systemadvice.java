@@ -14,7 +14,7 @@ import com.alishushu.mapper.SysteminfoMapper;
 import java.util.*;
 
 /**
-test
+test add
 **/
 @Aspect
 public class Systemadvice {
@@ -35,3 +35,4 @@ public class Systemadvice {
 		//return count;
 	}
 }
+
